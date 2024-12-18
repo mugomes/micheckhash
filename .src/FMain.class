@@ -65,3 +65,9 @@ Public Sub Form_Open()
   
 
 End
+
+Public Sub URLLabel1_Click()
+
+  mnuApoie_Click
+
+End
