@@ -71,3 +71,9 @@ Public Sub URLLabel1_Click()
   mnuApoie_Click
 
 End
+
+Public Sub mnuCheckUpdate_Click()
+
+  Shell "xdg-open \"https://www.mestredainfo.com.br/p/micheckhash.html\""
+
+End

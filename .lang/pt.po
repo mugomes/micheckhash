@@ -2,26 +2,30 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: micheckhash 3.18.0\n"
-"PO-Revision-Date: 2024-08-26 16:12 UTC\n"
+"PO-Revision-Date: 2024-12-22 20:07 UTC\n"
 "Last-Translator: Murilo Gomes Julio <contatomestredainfo@gmail.com>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: FMain.form:34
+#: FMain.form:37
 msgid "About"
 msgstr "Sobre"
 
-#: FAbout.form:18 FMain.form:44
+#: FAbout.form:18 FMain.form:54
 msgid "About MICheckHash"
 msgstr "Sobre MICheckHash"
 
-#: FMain.form:84
+#: FMain.form:94
 msgid "Check"
 msgstr "Verificar"
 
-#: FGerarHash.form:41 FMain.form:69
+#: FMain.form:40
+msgid "Check Update"
+msgstr "Verificar Atualização"
+
+#: FGerarHash.form:41 FMain.form:79
 msgid "File"
 msgstr "Arquivo"
 
@@ -41,7 +45,7 @@ msgstr "Preencha todos os campos antes de gerar!"
 msgid "Generate"
 msgstr "Gerar"
 
-#: FGerarHash.form:16 FMain.form:29
+#: FGerarHash.form:16 FMain.form:32
 msgid "Generate Hash"
 msgstr "Gerar hash"
 
@@ -49,7 +53,7 @@ msgstr "Gerar hash"
 msgid "Hash:"
 msgstr "Hash:"
 
-#: FMain.form:75
+#: FMain.form:85
 msgid "Hash provided by the developer"
 msgstr "Hash fornecido pelo desenvolvedor"
 
@@ -57,12 +61,12 @@ msgstr "Hash fornecido pelo desenvolvedor"
 msgid "Hash saved successfully!"
 msgstr "Hash salvo com sucesso!"
 
-#: FGerarHash.form:23 FMain.form:51
+#: FGerarHash.form:23 FMain.form:61
 msgid "Hash Type"
 msgstr "Tipo de hash"
 
 # gb-ignore
-#: .project:1 FMain.form:21
+#: .project:1 FMain.form:24
 msgid "MICheckHash"
 msgstr ""
 
@@ -74,7 +78,7 @@ msgstr "Salvar"
 msgid "Select File"
 msgstr "Selecione o arquivo"
 
-#: FMain.form:37
+#: FMain.form:47
 msgid "Support MICheckHash"
 msgstr "Apoie MICheckHash"
 
@@ -86,7 +90,7 @@ msgstr "O hash do arquivo é diferente do hash informado."
 msgid "The file hash is the same as the entered hash."
 msgstr "O hash do arquivo é igual ao hash informado."
 
-#: FMain.form:26
+#: FMain.form:29
 msgid "Tools"
 msgstr "Ferramentas"
 

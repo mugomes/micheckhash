@@ -2,7 +2,7 @@
 Title=MICheckHash
 Startup=FMain
 Icon=micheckhash.png
-Version=0.0.4
+Version=0.0.5
 Component=gb.image
 Component=gb.gtk3
 Component=gb.form
