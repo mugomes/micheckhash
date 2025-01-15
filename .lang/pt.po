@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: micheckhash 3.18.0\n"
-"PO-Revision-Date: 2024-12-22 20:07 UTC\n"
-"Last-Translator: Murilo Gomes Julio <contatomestredainfo@gmail.com>\n"
+"PO-Revision-Date: 2025-01-01 16:01 UTC\n"
+"Last-Translator: Mestre da Info <contatomestredainfo@gmail.com>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,7 +13,7 @@ msgstr ""
 msgid "About"
 msgstr "Sobre"
 
-#: FAbout.form:18 FMain.form:54
+#: FAbout.form:19 FMain.form:54
 msgid "About MICheckHash"
 msgstr "Sobre MICheckHash"
 
@@ -98,4 +98,8 @@ msgstr "Ferramentas"
 #: .project:2
 msgid "Verify and hash files.\nThe MICheckHash is under license GPL-2.0-only"
 msgstr ""
+
+#: FAbout.class:19
+msgid "Version:"
+msgstr "Versão:"
 
