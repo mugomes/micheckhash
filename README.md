@@ -4,7 +4,7 @@ Verify and hash files.
 
 ## Information
 
-- [Página do MICheckHash](https://www.mestredainfo.com.br/2025/01/micheckhash.html)
+- [Página do MICheckHash](https://www.mestredainfo.com.br/p/softwares.html)
 
 ## License
 
