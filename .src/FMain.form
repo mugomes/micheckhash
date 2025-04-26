@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,53,49)
+  MoveScaled(0,0,53,44)
   Font = Font["11"]
   Text = ("MICheckHash")
   Icon = Picture["micheckhash.png"]
@@ -60,11 +60,5 @@
   { btnVerificar Button
     MoveScaled(13,32,26,5)
     Text = ("Check")
-  }
-  { URLLabel1 URLLabel
-    MoveScaled(0,40,53,3)
-    Font = Font["Bold,9"]
-    Alignment = Align.Center
-    Text = ("Support MICheckHash")
   }
 }
