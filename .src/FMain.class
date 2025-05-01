@@ -8,7 +8,7 @@
 
 Public Sub mnuApoie_Click()
   
-  Shell "xdg-open \"https://www.mestredainfo.com.br/p/contato.html#apoie\""
+  Shell "xdg-open \"https://www.mestredainfo.com.br/p/apoie.html\""
   
 End
 
@@ -61,8 +61,6 @@ Public Sub txtArquivo_Click()
 End
 
 Public Sub Form_Open()
-
-  
 
 End
 
