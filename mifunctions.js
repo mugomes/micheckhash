@@ -198,10 +198,10 @@ module.exports = {
             const fs = require('fs');
 
             try {
-                if (fs.existsSync(filename)) {
+                if (fs.existsSync(arquivo)) {
                     let sFilename = fs.createReadStream(arquivo);
                     let sCript = sCrypto.createHash(tipo);
-
+                    
                     sFilename.on('data', (data) => {
                         sCript.update(data);
                     });
