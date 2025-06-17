@@ -118,10 +118,6 @@ function miNewWindow(url, width, height, resizable, frame, hide) {
         createMenu(sNewWindow, url.replace('.html', ''));
     }
 
-    // if (sandbox) {
-    //     sNewWindow.webContents.openDevTools();
-    // }
-
     createMenuContext(sNewWindow);
 
     sNewWindow.webContents.setWindowOpenHandler(({ url }) => {
