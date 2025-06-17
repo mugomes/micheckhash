@@ -23,5 +23,8 @@
     "Danger! The file hash is different from the reported hash.": "Cuidado! O hash do arquivo é diferente do hash informado.",
     "Generate": "Gerar",
     "Hash saved successfully!": "Hash salvo com sucesso!",
-    "An error occurred, unable to save the hash!": "Ocorreu um erro, não foi possível salvar o hash!"
+    "An error occurred, unable to save the hash!": "Ocorreu um erro, não foi possível salvar o hash!",
+    "Third Party Resources Used": "Recursos de Terceiros Utilizados",
+    "Checking hash...": "Verificando hash...",
+    "Generating hash...": "Gerando hash..."
 }

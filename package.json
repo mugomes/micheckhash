@@ -1,15 +1,13 @@
 {
     "name": "micheckhash",
     "productName": "MICheckHash",
-    "version": "2.0.0",
-    "description": "Verify and hash files.",
+    "version": "2.1.0",
+    "description": "Verifies and generates file hashes.",
     "main": "main.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "electron .",
-      "package-win32": "electron-forge package --platform=win32",
       "package": "electron-forge package",
-      "make-win32": "electron-forge make --platform=win32",
       "make": "electron-forge make"
     },
     "author": {

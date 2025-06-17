@@ -20,7 +20,9 @@ async function checkHash(e) {
         return false;
     }
 
-    document.getElementById('resultado').innerHTML = '<div class="alert alert-info">Verificando hash...</div>';
+    micheckhash.translate('Checking hash...').then((sValue) => {
+        document.getElementById('resultado').innerHTML = `<div class="alert alert-info">${sValue}</div>`;
+    });
 
     micheckhash.getHash(sTipoHash, document.getElementById('txtArquivo').value).then((sHashFile) => {
         let sHash = document.getElementById('txtHash').value;

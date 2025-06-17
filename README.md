@@ -1,6 +1,6 @@
 # MICheckHash
 
-Verify and hash files.
+Verifies and generates file hashes.
 
 ## Information
 

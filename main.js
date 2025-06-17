@@ -107,10 +107,6 @@ function miNewWindow(url, width, height, resizable, frame, hide) {
         const mifunctions = require(path.join(app.getAppPath(), '/mifunctions.js'));
         mifunctions.mifunctions(sNewWindow, milang, miNewWindow, miPath);
 
-        ipcMain.handle('appSair', async (event) => {
-            app.quit();
-        });
-
         createMenu(sNewWindow, 'menu');
 
         sStartApp = false;

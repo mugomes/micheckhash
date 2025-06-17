@@ -20,7 +20,9 @@ async function generateHash(e) {
         return false;
     }
 
-    document.getElementById('resultado').innerHTML = '<div class="alert alert-info">Gerando hash...</div>';
+    micheckhash.translate('Generating hash...').then((sValue) => {
+        document.getElementById('resultado').innerHTML = `<div class="alert alert-info">${sValue}</div>`;
+    });
 
     micheckhash.getHash(sTipoHash, document.getElementById('txtArquivo').value).then((sHashFile) => {
         SalvarArquivo(document.getElementById('txtArquivo').value, document.getElementById('txtTipoHash').value, sHashFile);
