@@ -48,7 +48,6 @@ app.setName('MICheckHash');
 
 let miIcon = path.join(miPath, '/icon/micheckhash.png');
 let sStartApp = true;
-let sandbox = false;
 
 function createMenu(sWin, sFileMenu) {
     if (fs.existsSync(path.join(miPath, '/menus/', `${sFileMenu}.json`))) {
@@ -134,33 +133,6 @@ function miNewWindow(url, width, height, resizable, frame, hide) {
 // Template de Menu
 function getMenuTemplate(win, menuData) {
     let template = [];
-
-    if (sandbox) {
-        let devMenu = {
-            label: milang.traduzir('Dev'),
-            submenu: [
-                {
-                    label: milang.traduzir('Refresh'),
-                    accelerator: 'F5',
-                    click: () => {
-                        win.reload();
-                    }
-                },
-                {
-                    type: 'separator'
-                },
-                {
-                    label: milang.traduzir('Tools'),
-                    accelerator: 'F12',
-                    click: () => {
-                        win.openDevTools();
-                    }
-                }
-            ]
-        }
-
-        template.push(devMenu);
-    }
 
     // Loop sobre as chaves do objeto JSON
     Object.keys(menuData).forEach((sKey) => {
