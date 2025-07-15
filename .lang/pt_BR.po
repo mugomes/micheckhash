@@ -1,0 +1,111 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: micheckhash 3.19.0\n"
+"PO-Revision-Date: 2025-07-15 17:37 UTC\n"
+"Last-Translator: Murilo Gomes <mugomesoficial@gmail.com>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: FMain.form:36
+msgid "About"
+msgstr "Sobre"
+
+#: FMain.form:53
+msgid "About MiCheckHash"
+msgstr "Sobre MiCheckHash"
+
+#: FMain.form:93
+msgid "Check"
+msgstr "Verificar"
+
+#: FMain.form:39
+msgid "Check Update"
+msgstr "Verificar Atualização"
+
+#: FGerarHash.form:41 FMain.form:78
+msgid "File"
+msgstr "Arquivo"
+
+#: FGerarHash.class:23 FMain.class:41
+msgid "File not found!"
+msgstr "Arquivo não encontrado!"
+
+#: FMain.class:27
+msgid "Fill in all fields before checking!"
+msgstr "Preencha todos os campos antes de verificar!"
+
+#: FGerarHash.class:14
+msgid "Fill in all fields before generating!"
+msgstr "Preencha todos os campos antes de gerar!"
+
+#: FGerarHash.form:46
+msgid "Generate"
+msgstr "Gerar"
+
+#: FGerarHash.form:16 FMain.form:31
+msgid "Generate Hash"
+msgstr "Gerar hash"
+
+# gb-ignore
+#: FGerarHash.form:52
+msgid "Hash:"
+msgstr ""
+
+#: FMain.form:84
+msgid "Hash provided by the developer"
+msgstr "Hash fornecido pelo desenvolvedor"
+
+#: FGerarHash.class:42
+msgid "Hash saved successfully!"
+msgstr "Hash salvo com sucesso!"
+
+#: FGerarHash.form:23 FMain.form:60
+msgid "Hash Type"
+msgstr "Tipo de Hash"
+
+# gb-ignore
+#: .project:1
+msgid "MICheckHash"
+msgstr ""
+
+# gb-ignore
+#: FMain.form:23
+msgid "MiCheckHash"
+msgstr ""
+
+#: FGerarHash.form:62
+msgid "Save"
+msgstr "Salvar"
+
+#: FGerarHash.class:31 FMain.class:55
+msgid "Select File"
+msgstr "Selecione Arquivo"
+
+#: FMain.form:46
+msgid "Subscribers"
+msgstr "Assinantes"
+
+#: FMain.class:38
+msgid "The file hash is different from the reported hash."
+msgstr "O hash de arquivo é diferente do hash informado."
+
+#: FMain.class:36
+msgid "The file hash is the same as the entered hash."
+msgstr "O hash do arquivo é o mesmo que o hash informado."
+
+#: FMain.form:28
+msgid "Tools"
+msgstr "Ferramentas"
+
+# gb-ignore
+#: .project:2
+msgid "Verify and hash files.\nThe MICheckHash is under license GPL-2.0-only"
+msgstr ""
+
+#: FAbout.class:16
+msgid "Version:"
+msgstr "Versão:"
+
