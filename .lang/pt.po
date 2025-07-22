@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: micheckhash 3.19.0\n"
-"PO-Revision-Date: 2025-07-15 17:36 UTC\n"
+"PO-Revision-Date: 2025-07-19 02:20 UTC\n"
 "Last-Translator: Murilo Gomes <mugomesoficial@gmail.com>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +24,10 @@ msgstr "Verificar"
 #: FMain.form:39
 msgid "Check Update"
 msgstr "Verificar Atualização"
+
+#: FMain.class:38
+msgid "Different!"
+msgstr "Diferente!"
 
 #: FGerarHash.form:41 FMain.form:78
 msgid "File"
@@ -65,12 +69,7 @@ msgstr "Hash salvo com sucesso!"
 msgid "Hash Type"
 msgstr "Tipo de hash"
 
-# gb-ignore
-#: .project:1
-msgid "MICheckHash"
-msgstr ""
-
-#: FMain.form:23
+#: .project:1 FMain.form:23
 msgid "MiCheckHash"
 msgstr "Micheckhash"
 
@@ -86,13 +85,9 @@ msgstr "Selecione o arquivo"
 msgid "Subscribers"
 msgstr "Assinantes"
 
-#: FMain.class:38
-msgid "The file hash is different from the reported hash."
-msgstr "O hash do arquivo é diferente do hash informado."
-
 #: FMain.class:36
-msgid "The file hash is the same as the entered hash."
-msgstr "O hash do arquivo é igual ao hash informado."
+msgid "Success!"
+msgstr "Sucesso!"
 
 #: FMain.form:28
 msgid "Tools"
@@ -100,7 +95,7 @@ msgstr "Ferramentas"
 
 # gb-ignore
 #: .project:2
-msgid "Verify and hash files.\nThe MICheckHash is under license GPL-2.0-only"
+msgid "Verify and hash files.\nThe MiCheckHash is under license GPL-2.0-only"
 msgstr ""
 
 #: FAbout.class:16
