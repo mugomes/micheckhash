@@ -1,10 +1,21 @@
 # MiCheckHash
 
-Verifies and generates file hashes.
+MiCheckHash is a software for checking and generating file hashes.
 
-## Information
+## System Requirement
 
-- [Page MiCheckHash](https://www.mugomes.com.br/2025/07/micheckhash.html)
+### Linux
+
+ - Ubuntu 24.04 or higher
+ - Python 3
+ - ttkbootstrap
+
+## Support
+
+- https://www.asaas.com/c/girp15xsowg4dpvf (Only in Brazil)
+- https://www.asaas.com/c/0f9eydhmgg8e3mrj (Only in Brazil - Monthly)
+- https://donate.stripe.com/14kdSugShfxs9by6oo
+- https://apoia.se/profmu
 
 ## License
 
