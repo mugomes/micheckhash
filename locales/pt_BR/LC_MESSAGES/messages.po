@@ -1,0 +1,116 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MiCheckHash\n"
+"POT-Creation-Date: 2025-10-19 14:08-0300\n"
+"PO-Revision-Date: 2025-10-19 14:08-0300\n"
+"Last-Translator: \n"
+"Language-Team: Murilo Gomes Julio\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: frmGerar.py:32
+msgid "Text File"
+msgstr "Arquivo de Texto"
+
+#: frmGerar.py:33
+msgid "Save As"
+msgstr "Salvar Como"
+
+#: frmGerar.py:43 frmMain.py:38
+msgid "Open File"
+msgstr "Abrir Arquivo"
+
+#: frmGerar.py:87 frmMain.py:93
+msgid "Could not generate file hash."
+msgstr "Não foi possível gerar o hash do arquivo."
+
+#: frmGerar.py:92 frmMain.py:105
+#, python-format
+msgid "Error reading file: %s"
+msgstr "Erro ao ler o arquivo: %s"
+
+#: frmGerar.py:97
+#, python-format
+msgid "Generate - %s"
+msgstr "Gerar - %s"
+
+#: frmGerar.py:111
+msgid "File"
+msgstr "Arquivo"
+
+#: frmGerar.py:112
+msgid "Save Hash"
+msgstr "Salvar Hash"
+
+#: frmGerar.py:115 frmMain.py:138
+msgid "Select hash type"
+msgstr "Selecione o tipo de hash"
+
+#: frmGerar.py:121
+msgid "Select file"
+msgstr "Selecione o arquivo"
+
+#: frmGerar.py:131
+msgid "Generated Code"
+msgstr "Código Gerado"
+
+#: frmGerar.py:137
+msgid "Copy"
+msgstr "Copiar"
+
+#: frmGerar.py:140 frmMain.py:127
+msgid "Generate Hash"
+msgstr "Gerar Hash"
+
+#: frmMain.py:97
+msgid "Success!"
+msgstr "Sucesso!"
+
+#: frmMain.py:99
+msgid "Different!"
+msgstr "Diferente"
+
+#: frmMain.py:126
+msgid "Tools"
+msgstr "Ferramentas"
+
+#: frmMain.py:130
+msgid "About"
+msgstr "Sobre"
+
+#: frmMain.py:131
+msgid "Check Update"
+msgstr "Verificar Atualização"
+
+#: frmMain.py:133
+msgid "Support MiCheckHash"
+msgstr "Apoie MiCheckHash"
+
+#: frmMain.py:135
+msgid "About MiCheckHash"
+msgstr "Sobre MiCheckHash"
+
+#: frmMain.py:144
+msgid "Select the file"
+msgstr "Selecionar o arquivo"
+
+#: frmMain.py:154
+msgid "Type/Paste the Hash"
+msgstr "Digitar/Colar o Hash"
+
+#: frmMain.py:160
+msgid "Paste"
+msgstr "Colar"
+
+#: frmMain.py:163
+msgid "Check Now"
+msgstr "Verificar Agora"
+
+#: frmMain.py:166
+msgid "Verifying Hash... Please wait!"
+msgstr "Verificando Hash... Aguarde!"
