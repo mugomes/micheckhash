@@ -2,6 +2,10 @@
 
 MiCheckHash is a software for checking and generating file hashes.
 
+## Information
+
+ - [Page MiCheckHash](https://github.com/mugomes/micheckhash)
+
 ## System Requirement
 
 ### Linux
