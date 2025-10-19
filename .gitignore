@@ -8,3 +8,4 @@ win32/
 #files
 micheckhash.spec
 compile.sh
+*.mo
