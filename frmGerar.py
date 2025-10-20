@@ -5,8 +5,7 @@
 
 import tkinter as tk
 import ttkbootstrap as ttk
-import gettext, subprocess, os
-import hashlib
+import os, hashlib
 
 import translate as cTrans
 

@@ -5,16 +5,10 @@
 
 import tkinter as tk
 import ttkbootstrap as ttk
-import gettext, subprocess, os
-import hashlib
 
-from tkinter import Frame, StringVar, Menu, messagebox
-from tkinter.filedialog import askopenfilename, asksaveasfilename
 from ttkbootstrap.constants import *
 
 def showWindow():
-    _ = lambda s: s
-
     frmAbout = ttk.Toplevel()
     frmAbout.title("Sobre - MiCheckHash")
     frmAbout.geometry("400x400")
@@ -35,7 +29,7 @@ def showWindow():
     lblDescriptionApp.pack(anchor="nw", padx=5, pady=(7, 3))
 
     lblVersion = ttk.Label(
-        frmAbout, text='Version: 3.0.0', font=("", 12)
+        frmAbout, text='Version: 3.0.1', font=("", 12)
     )
     lblVersion.pack(anchor="nw", padx=5, pady=(7, 3))
 

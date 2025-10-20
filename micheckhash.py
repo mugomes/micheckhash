@@ -5,7 +5,7 @@
 
 import tkinter as tk
 import ttkbootstrap as ttk
-import gettext, locale, os, sys, hashlib, threading, webbrowser
+import os, hashlib, threading, webbrowser
 
 # Controls
 import translate as cTrans
@@ -102,7 +102,7 @@ def checkHash():
                         icon="error",
                     )
                     return
-                print(resultado)
+
                 if resultado == codigoColado:
                     messagebox.showinfo(
                         title="MiCheckHash", message=_("Success!"), icon="info"
