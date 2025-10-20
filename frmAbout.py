@@ -1,4 +1,4 @@
-# Copyright (C) 2025 Murilo Gomes Julio
+# Copyright (C) 2024-2025 Murilo Gomes Julio
 # SPDX-License-Identifier: GPL-2.0-only
 
 # Site: https://github.com/mugomes
@@ -44,7 +44,7 @@ def showWindow():
     lblSite.pack(anchor="nw", padx=5, pady=(7, 3))
 
     lblCopyright = ttk.Label(
-        frmAbout, text='Copyright (C) 2025 Murilo Gomes Julio', font=("", 12)
+        frmAbout, text='Copyright (C) 2024-2025 Murilo Gomes Julio', font=("", 12)
     )
     lblCopyright.pack(anchor="nw", padx=5, pady=(7, 3))
 

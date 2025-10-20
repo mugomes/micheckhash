@@ -1,4 +1,4 @@
-# Copyright (C) 2025 Murilo Gomes Julio
+# Copyright (C) 2024-2025 Murilo Gomes Julio
 # SPDX-License-Identifier: GPL-2.0-only
 
 # Site: https://github.com/mugomes
