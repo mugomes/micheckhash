@@ -1,10 +1,8 @@
 #folders
-__pycache__/
-mivenv/
-build/
-dist/
+bin/
+fyne-cross/
 
 #files
 micheckhash.spec
 compile.sh
-*.mo
+
