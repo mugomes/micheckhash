@@ -14,6 +14,7 @@ import (
 	"fmt"
 	"hash"
 	"io"
+	lang "mugomes/micheckhash/modules"
 	"os"
 	"path/filepath"
 	"strings"
@@ -26,12 +27,13 @@ import (
 )
 
 func showGerarHash(a fyne.App) {
-	w := a.NewWindow("Gerar Hash")
+	_ = lang.LoadTranslations()
+	w := a.NewWindow(lang.T("Generate Hash"))
 	w.Resize(fyne.NewSize(500, 300))
 	w.CenterOnScreen()
 	w.SetFixedSize(true)
 
-	lblTipoHash := widget.NewLabel("Tipo de Hash")
+	lblTipoHash := widget.NewLabel(lang.T("Hash Type"))
 	lblTipoHash.Move(fyne.NewPos(5, 0))
 	lblTipoHash.TextStyle = fyne.TextStyle{Bold: true}
 	sOptions := []string{"MD5", "SHA1", "SHA256", "SHA512"}
@@ -40,7 +42,7 @@ func showGerarHash(a fyne.App) {
 	cboTipoHash.Resize(fyne.NewSize(w.Canvas().Size().Width-17, 30))
 	cboTipoHash.Move(fyne.NewPos(5, lblTipoHash.Position().Y+37))
 
-	lblArquivo := widget.NewLabel("Arquivo")
+	lblArquivo := widget.NewLabel(lang.T("Select file"))
 	lblArquivo.TextStyle = fyne.TextStyle{Bold: true}
 	lblArquivo.Move(fyne.NewPos(5, cboTipoHash.Position().Y+37))
 	txtArquivo := widget.NewEntry()
@@ -66,10 +68,10 @@ func showGerarHash(a fyne.App) {
 	var txtInfo *widget.Entry
 	var btnSave *widget.Button
 	var sTipoHash = ""
-	btnGerar = widget.NewButton("Generate Hash", func() {
+	btnGerar = widget.NewButton(lang.T("Generate Hash"), func() {
 		go func() {
 			fyne.Do(func() {
-				txtInfo.SetText("Generate Hash... Please wait!")
+				txtInfo.SetText(lang.T("Generating Hash... Please wait!"))
 				btnGerar.Disable()
 			})
 
@@ -122,7 +124,7 @@ func showGerarHash(a fyne.App) {
 	txtInfo.Disable()
 	txtInfo.Resize(fyne.NewSize(w.Canvas().Size().Width-87, 38.04))
 	txtInfo.Move(fyne.NewPos(5, ctnGerar.Position().Y+52))
-	btnSave = widget.NewButton("Save", func() {
+	btnSave = widget.NewButton(lang.T("Save"), func() {
 		sFilename := filepath.Base(txtArquivo.Text)
 		sConteudo := []byte(fmt.Sprintf("%s %s", txtInfo.Text, sFilename))
 		if err := os.WriteFile(txtArquivo.Text+"."+sTipoHash, sConteudo, 0644); err != nil {
