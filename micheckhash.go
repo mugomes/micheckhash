@@ -70,6 +70,10 @@ func main() {
 			a.OpenURL(url)
 		}),
 		fyne.NewMenuItemSeparator(),
+		fyne.NewMenuItem(lang.T("Support MiCheckHash"), func() {
+			url, _ := url.Parse("https://www.mugomes.com.br/p/apoie.html")
+			a.OpenURL(url)
+		}),
 		fyne.NewMenuItem(lang.T("Technical Support"), func() {
 			url, _ := url.Parse("https://www.mugomes.com.br/2025/07/micheckhash.html#support")
 			a.OpenURL(url)
