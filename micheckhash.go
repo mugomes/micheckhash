@@ -28,7 +28,7 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-const VERSION_APP = "4.0.0"
+const VERSION_APP = "5.0.0"
 
 type myTheme struct {
 	fyne.Theme
