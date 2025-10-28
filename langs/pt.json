@@ -1,16 +1,8 @@
 {
-  "Text File": "Arquivo de Texto",
-  "Save As": "Salvar Como",
-  "Open File": "Abrir Arquivo",
-  "Could not generate file hash.": "Não foi possível gerar o hash do arquivo.",
-  "Error reading file: %s": "Erro ao ler o arquivo: %s",
-  "Generate - %s": "Gerar - %s",
   "File": "Arquivo",
-  "Save Hash": "Salvar Hash",
+  "Save": "Salvar",
   "Hash Type": "Tipo de Hash",
   "Select file": "Selecione o arquivo",
-  "Generated Code": "Código Gerado",
-  "Copy": "Copiar",
   "Generate Hash": "Gerar Hash",
   "Success!": "Sucesso!",
   "Different!": "Diferente",
@@ -18,10 +10,10 @@
   "About": "Sobre",
   "Check Update": "Verificar Atualização",
   "Support MiCheckHash": "Apoie MiCheckHash",
+  "Technical Support": "Suporte Técnico",
   "About MiCheckHash": "Sobre MiCheckHash",
-  "Select the file": "Selecionar o arquivo",
-  "Type/Paste the Hash": "Digitar/Colar o Hash",
-  "Paste": "Colar",
+  "Type/Paste the Hash": "Digite/Cole o Hash",
   "Check Now": "Verificar Agora",
-  "Verifying Hash... Please wait!": "Verificando Hash... Aguarde!"
+  "Verifying Hash... Please wait!": "Verificando Hash... Aguarde!",
+  "Generating Hash... Please wait!": "Gerando Hash... Aguarde!"
 }
