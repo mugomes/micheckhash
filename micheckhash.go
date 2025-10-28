@@ -1,7 +1,7 @@
-// Copyright (C) 2024-2025 Murilo Gomes Julio
-// SPDX-License-Identifier: GPL-2.0-only
+// MiCheckHash
+// Copyright (C) 2025 Murilo Gomes Julio. Todos os direitos reservados.
 
-// Site: https://www.mugomes.com.br
+// Este software e código-fonte é distribuído sob os termos do Contrato de Licença de Usuário Final do MiCheckHash.
 
 package main
 
@@ -70,8 +70,8 @@ func main() {
 			a.OpenURL(url)
 		}),
 		fyne.NewMenuItemSeparator(),
-		fyne.NewMenuItem(lang.T("Support MiCheckHash"), func() {
-			url, _ := url.Parse("https://www.mugomes.com.br/p/apoie.html")
+		fyne.NewMenuItem(lang.T("Technical Support"), func() {
+			url, _ := url.Parse("https://www.mugomes.com.br/2025/07/micheckhash.html#support")
 			a.OpenURL(url)
 		}),
 		fyne.NewMenuItemSeparator(),
