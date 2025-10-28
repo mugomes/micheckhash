@@ -9,7 +9,6 @@ import (
 	"encoding/hex"
 	"hash"
 	"io"
-	"log"
 	lang "mugomes/micheckhash/modules"
 	"net/url"
 	"os"
@@ -42,47 +41,53 @@ func (m myTheme) Size(name fyne.ThemeSizeName) float32 {
 	return m.Theme.Size(name)
 }
 
-func main() {		
+func main() {
 	_ = lang.LoadTranslations()
 
-	a := app.New()
+	sIcon, err := fyne.LoadResourceFromPath("micheckhash.png")
+	if err != nil {
+		panic(err)
+	}
+
+	a := app.NewWithID("br.com.mugomes.micheckhash")
+	a.SetIcon(sIcon)
 	w := a.NewWindow("MiCheckHash")
-	w.Resize(fyne.NewSize(800, 600))
+	w.Resize(fyne.NewSize(500, 379))
 	w.CenterOnScreen()
 	w.SetFixedSize(true)
 	a.Settings().SetTheme(&myTheme{theme.DarkTheme()})
 
 	mnuTools := fyne.NewMenu(lang.T("Tools"),
 		fyne.NewMenuItem(
-			"Gerar Hash", func() {
+			lang.T("Generate Hash"), func() {
 				showGerarHash(a)
 			}),
 	)
 
-	mnuAbout := fyne.NewMenu("Sobre",
-		fyne.NewMenuItem("Verificar Atualizações", func() {
+	mnuAbout := fyne.NewMenu(lang.T("About"),
+		fyne.NewMenuItem(lang.T("Check Update"), func() {
 			url, _ := url.Parse("https://www.mugomes.com.br/2025/07/micheckhash.html")
 			a.OpenURL(url)
 		}),
 		fyne.NewMenuItemSeparator(),
-		fyne.NewMenuItem("Apoie MiCheckHash", func() {
+		fyne.NewMenuItem(lang.T("Support MiCheckHash"), func() {
 			url, _ := url.Parse("https://www.mugomes.com.br/p/apoie.html")
 			a.OpenURL(url)
 		}),
 		fyne.NewMenuItemSeparator(),
-		fyne.NewMenuItem("Sobre MiCheckHash", func() {
+		fyne.NewMenuItem(lang.T("About MiCheckHash"), func() {
 			showAbout(a)
 		}),
 	)
 
 	w.SetMainMenu(fyne.NewMainMenu(mnuTools, mnuAbout))
 
-	lblTipo := widget.NewLabel("Tipo de Hash")
+	lblTipo := widget.NewLabel(lang.T("Hash Type"))
 	lblTipo.TextStyle = fyne.TextStyle{Bold: true}
 
 	sOptions := []string{"MD5", "SHA1", "SHA256", "SHA512"}
 	txtTipo := widget.NewSelect(sOptions, func(string) {})
-	txtTipo.PlaceHolder = "Selecione uma opção"
+	txtTipo.PlaceHolder = "MD5"
 	txtTipo.Resize(fyne.NewSize(w.Canvas().Size().Width-7, 40))
 	txtTipo.Move(fyne.NewPos(0, lblTipo.Position().Y+37))
 
@@ -90,49 +95,47 @@ func main() {
 	lblArquivo.TextStyle = fyne.TextStyle{Bold: true}
 	lblArquivo.Move(fyne.NewPos(0, txtTipo.Position().Y+37))
 	txtArquivo := widget.NewEntry()
-	txtArquivo.SetPlaceHolder("Selecione um arquivo")
+	txtArquivo.SetPlaceHolder(lang.T("Select file"))
 	txtArquivo.Move(fyne.NewPos(0, lblArquivo.Position().Y+37))
-	txtArquivo.Resize(fyne.NewSize(w.Canvas().Size().Width-140, 38.4))
+	txtArquivo.Resize(fyne.NewSize(w.Canvas().Size().Width-52, 38.4))
 	txtArquivo.Disable()
 	btnArquivo := widget.NewButton("...", func() {
 		dialog.ShowFileOpen(func(r fyne.URIReadCloser, err error) {
 			if r != nil {
 				sPath := r.URI().Path()
 				txtArquivo.SetText(sPath)
-				txtArquivo.Refresh()
 			}
 		}, w)
 	})
 	btnArquivo.Resize(fyne.NewSize(30, 38.4))
 	btnArquivo.Move(fyne.NewPos(txtArquivo.Size().Width+10, txtArquivo.Position().Y))
 
-	lblHash := widget.NewLabel("Digitar/Colar Hash")
+	lblHash := widget.NewLabel(lang.T("Type/Paste the Hash"))
 	lblHash.Move(fyne.NewPos(0, txtArquivo.Position().Y+37))
 	txtHash := widget.NewEntry()
-	txtHash.Resize(fyne.NewSize(w.Canvas().Size().Width-140, 37))
+	txtHash.Resize(fyne.NewSize(w.Canvas().Size().Width-7, 37))
 	txtHash.Move(fyne.NewPos(0, lblHash.Position().Y+37))
 
 	var lblInfo *widget.Label
 	var btnCheck *widget.Button
 
-	btnCheck = widget.NewButton("Verificar Hash", func() {
+	btnCheck = widget.NewButton(lang.T("Check Now"), func() {
 		go func() {
-			lblInfo.SetText("Verificando hash...")
-			btnCheck.Disable()
+			fyne.Do(func() {
+				lblInfo.SetText(lang.T("Verifying Hash... Please wait!"))
+				btnCheck.Disable()
+			})
 
 			sFilename := txtArquivo.Text
 			sHash := txtHash.Text
 			sTipoHash := txtTipo.Selected
 			if sTipoHash == "" {
-				sTipoHash = "md5"				
+				sTipoHash = "md5"
 			} else {
 				sTipoHash = strings.ToLower(sTipoHash)
 			}
 
-			file, err := os.Open(sFilename)
-			if err != nil {
-				log.Fatalf("Error opening file: %v", err)
-			}
+			file, _ := os.Open(sFilename)
 			defer file.Close()
 
 			var hashsum hash.Hash
@@ -148,20 +151,28 @@ func main() {
 			}
 
 			if _, err := io.Copy(hashsum, file); err != nil {
-				log.Fatalf("Erro ao calcular o hash: %v", err)
 				return
 			}
 
 			hashInBytes := hashsum.Sum(nil)
 			fileHash := hex.EncodeToString(hashInBytes)
 
+			fyne.Do(func() {
+				lblInfo.SetText("")
+			})
 			if fileHash == sHash {
-				lblInfo.SetText("Sucesso!")
+				fyne.Do(func() {
+					dialog.NewInformation("MiCheckHash", lang.T("Success!"), w).Show()
+				})
 			} else {
-				lblInfo.SetText("Diferente!")
+				fyne.Do(func() {
+					dialog.NewInformation("MiCheckHash", lang.T("Different!"), w).Show()
+				})
 			}
 
-			btnCheck.Enable()
+			fyne.Do(func() {
+				btnCheck.Enable()
+			})
 		}()
 	})
 
