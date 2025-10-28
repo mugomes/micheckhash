@@ -8,7 +8,6 @@ package main
 import (
 	"image/color"
 	"net/url"
-	lang "mugomes/micheckhash/modules"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -17,14 +16,12 @@ import (
 )
 
 func showAbout(a fyne.App) {
-	lang.LoadTranslations()
-
 	w := a.NewWindow("Sobre")
 	w.Resize(fyne.NewSize(400, 470))
 	w.CenterOnScreen()
 	w.SetFixedSize(true)
 
-	lblSoftware := canvas.NewText(lang.T("MiCheckHash - Version: %s", VERSION_APP), color.Opaque)
+	lblSoftware := canvas.NewText("MiCheckHash - Version:"+VERSION_APP, color.Opaque)
 	lblSoftware.TextSize = 18
 	lblSoftware.TextStyle.Bold = true
 	lblSoftware.Move(fyne.NewPos(9, 7))
@@ -61,7 +58,7 @@ func showAbout(a fyne.App) {
 	MiCheckHash is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 	`)
 	txtLicense.Wrapping = fyne.TextWrapWord
-	vBoxLicense := container.NewVBox(txtLicense);
+	vBoxLicense := container.NewVBox(txtLicense)
 	vBoxLicense.Move(fyne.NewPos(0, lblLicense1.Position().Y+37))
 	vBoxLicense.Resize(fyne.NewSize(400, 400))
 	// sURL, _ := url.Parse("https://github.com/mugomes/micheckhash")
