@@ -104,7 +104,7 @@ func showGerarHash(a fyne.App) {
 	txtInfo.Move(fyne.NewPos(5, ctnGerar.Position().Y+52))
 	btnSave = widget.NewButton(c.T("Save"), func() {
 		sFilename := filepath.Base(txtArquivo.Text)
-		sConteudo := []byte(fmt.Sprintf("%s %s", txtInfo.Text, sFilename))
+		sConteudo := fmt.Appendf(nil, "%s %s",txtInfo.Text, sFilename)
 		if err := os.WriteFile(txtArquivo.Text+"."+sTipoHash, sConteudo, 0644); err != nil {
 			dialog.NewError(err, w)
 		}
