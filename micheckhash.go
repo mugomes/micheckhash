@@ -41,6 +41,31 @@ func (m myTheme) Size(name fyne.ThemeSizeName) float32 {
 	return m.Theme.Size(name)
 }
 
+func checkHash(sTipoHash string, file io.Reader) string {
+	var hashsum hash.Hash
+
+	switch sTipoHash {
+	case "md5":
+		hashsum = md5.New()
+	case "sha1":
+		hashsum = sha1.New()
+	case "sha256":
+		hashsum = sha256.New()
+	case "sha512":
+		hashsum = sha512.New()
+	default:
+		hashsum = md5.New()
+	}
+
+	if _, err := io.Copy(hashsum, file); err != nil {
+		return ""
+	}
+
+	hashInBytes := hashsum.Sum(nil)
+
+	return hex.EncodeToString(hashInBytes)
+}
+
 func main() {
 	lang.LoadTranslations()
 
@@ -142,27 +167,7 @@ func main() {
 			file, _ := os.Open(sFilename)
 			defer file.Close()
 
-			var hashsum hash.Hash
-
-			switch sTipoHash {
-			case "md5":
-				hashsum = md5.New()
-			case "sha1":
-				hashsum = sha1.New()
-			case "sha256":
-				hashsum = sha256.New()
-			case "sha512":
-				hashsum = sha512.New()
-			default:
-				hashsum = md5.New()
-			}
-
-			if _, err := io.Copy(hashsum, file); err != nil {
-				return
-			}
-
-			hashInBytes := hashsum.Sum(nil)
-			fileHash := hex.EncodeToString(hashInBytes)
+			fileHash := checkHash(sTipoHash, file)
 
 			fyne.Do(func() {
 				lblInfo.SetText("")
