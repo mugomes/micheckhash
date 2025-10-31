@@ -28,7 +28,7 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-const VERSION_APP = "5.0.0"
+const VERSION_APP string = "5.0.1"
 
 type myTheme struct {
 	fyne.Theme
@@ -36,15 +36,15 @@ type myTheme struct {
 
 func (m myTheme) Size(name fyne.ThemeSizeName) float32 {
 	if name == theme.SizeNameText {
-		return 16 // Set your desired font size here
+		return 16
 	}
 	return m.Theme.Size(name)
 }
 
 func main() {
-	_ = lang.LoadTranslations()
+	lang.LoadTranslations()
 
-	sIcon, err := fyne.LoadResourceFromPath("micheckhash.png")
+	sIcon, err := fyne.LoadResourceFromPath("icon/micheckhash.png")
 	if err != nil {
 		panic(err)
 	}
@@ -144,14 +144,17 @@ func main() {
 
 			var hashsum hash.Hash
 
-			if sTipoHash == "md5" {
+			switch sTipoHash {
+			case "md5":
 				hashsum = md5.New()
-			} else if sTipoHash == "sha1" {
+			case "sha1":
 				hashsum = sha1.New()
-			} else if sTipoHash == "sha256" {
+			case "sha256":
 				hashsum = sha256.New()
-			} else if sTipoHash == "sha512" {
+			case "sha512":
 				hashsum = sha512.New()
+			default:
+				hashsum = md5.New()
 			}
 
 			if _, err := io.Copy(hashsum, file); err != nil {
