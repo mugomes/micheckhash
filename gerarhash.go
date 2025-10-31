@@ -6,34 +6,28 @@
 package main
 
 import (
-	"crypto/md5"
-	"crypto/sha1"
-	"crypto/sha256"
-	"crypto/sha512"
-	"encoding/hex"
 	"fmt"
-	"hash"
-	"io"
-	lang "mugomes/micheckhash/modules"
-	"os"
-	"path/filepath"
-	"strings"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
+
+	c "mugomes/micheckhash/controls"
+	"os"
+	"path/filepath"
+	"strings"
 )
 
 func showGerarHash(a fyne.App) {
-	_ = lang.LoadTranslations()
-	w := a.NewWindow(lang.T("Generate Hash"))
+	c.LoadTranslations()
+	w := a.NewWindow(c.T("Generate Hash"))
 	w.Resize(fyne.NewSize(500, 300))
 	w.CenterOnScreen()
 	w.SetFixedSize(true)
 
-	lblTipoHash := widget.NewLabel(lang.T("Hash Type"))
+	lblTipoHash := widget.NewLabel(c.T("Hash Type"))
 	lblTipoHash.Move(fyne.NewPos(5, 0))
 	lblTipoHash.TextStyle = fyne.TextStyle{Bold: true}
 	sOptions := []string{"MD5", "SHA1", "SHA256", "SHA512"}
@@ -42,7 +36,7 @@ func showGerarHash(a fyne.App) {
 	cboTipoHash.Resize(fyne.NewSize(w.Canvas().Size().Width-17, 30))
 	cboTipoHash.Move(fyne.NewPos(5, lblTipoHash.Position().Y+37))
 
-	lblArquivo := widget.NewLabel(lang.T("Select file"))
+	lblArquivo := widget.NewLabel(c.T("Select file"))
 	lblArquivo.TextStyle = fyne.TextStyle{Bold: true}
 	lblArquivo.Move(fyne.NewPos(5, cboTipoHash.Position().Y+37))
 	txtArquivo := widget.NewEntry()
@@ -68,10 +62,10 @@ func showGerarHash(a fyne.App) {
 	var txtInfo *widget.Entry
 	var btnSave *widget.Button
 	var sTipoHash = ""
-	btnGerar = widget.NewButton(lang.T("Generate Hash"), func() {
+	btnGerar = widget.NewButton(c.T("Generate Hash"), func() {
 		go func() {
 			fyne.Do(func() {
-				txtInfo.SetText(lang.T("Generating Hash... Please wait!"))
+				txtInfo.SetText(c.T("Generating Hash... Please wait!"))
 				btnGerar.Disable()
 			})
 
@@ -87,25 +81,9 @@ func showGerarHash(a fyne.App) {
 			file, _ := os.Open(sFilename)
 			defer file.Close()
 
-			var hashsum hash.Hash
-
-			if sTipoHash == "md5" {
-				hashsum = md5.New()
-			} else if sTipoHash == "sha1" {
-				hashsum = sha1.New()
-			} else if sTipoHash == "sha256" {
-				hashsum = sha256.New()
-			} else if sTipoHash == "sha512" {
-				hashsum = sha512.New()
-			}
-
-			if _, err := io.Copy(hashsum, file); err != nil {
-				return
-			}
-
-			hashInBytes := hashsum.Sum(nil)
+			hashInBytes := c.GetHash(sTipoHash, file)
 			fyne.Do(func() {
-				txtInfo.SetText(hex.EncodeToString(hashInBytes))
+				txtInfo.SetText(hashInBytes)
 				btnGerar.Enable()
 			})
 		}()
@@ -124,7 +102,7 @@ func showGerarHash(a fyne.App) {
 	txtInfo.Disable()
 	txtInfo.Resize(fyne.NewSize(w.Canvas().Size().Width-87, 38.04))
 	txtInfo.Move(fyne.NewPos(5, ctnGerar.Position().Y+52))
-	btnSave = widget.NewButton(lang.T("Save"), func() {
+	btnSave = widget.NewButton(c.T("Save"), func() {
 		sFilename := filepath.Base(txtArquivo.Text)
 		sConteudo := []byte(fmt.Sprintf("%s %s", txtInfo.Text, sFilename))
 		if err := os.WriteFile(txtArquivo.Text+"."+sTipoHash, sConteudo, 0644); err != nil {

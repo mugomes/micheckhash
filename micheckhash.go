@@ -6,19 +6,6 @@
 package main
 
 import (
-	"encoding/hex"
-	"hash"
-	"io"
-	lang "mugomes/micheckhash/modules"
-	"net/url"
-	"os"
-	"strings"
-
-	"crypto/md5"
-	"crypto/sha1"
-	"crypto/sha256"
-	"crypto/sha512"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
@@ -26,6 +13,11 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
+
+	c "mugomes/micheckhash/controls"
+	"net/url"
+	"os"
+	"strings"
 )
 
 const VERSION_APP string = "5.0.1"
@@ -41,33 +33,8 @@ func (m myTheme) Size(name fyne.ThemeSizeName) float32 {
 	return m.Theme.Size(name)
 }
 
-func checkHash(sTipoHash string, file io.Reader) string {
-	var hashsum hash.Hash
-
-	switch sTipoHash {
-	case "md5":
-		hashsum = md5.New()
-	case "sha1":
-		hashsum = sha1.New()
-	case "sha256":
-		hashsum = sha256.New()
-	case "sha512":
-		hashsum = sha512.New()
-	default:
-		hashsum = md5.New()
-	}
-
-	if _, err := io.Copy(hashsum, file); err != nil {
-		return ""
-	}
-
-	hashInBytes := hashsum.Sum(nil)
-
-	return hex.EncodeToString(hashInBytes)
-}
-
 func main() {
-	lang.LoadTranslations()
+	c.LoadTranslations()
 
 	sIcon, err := fyne.LoadResourceFromPath("icon/micheckhash.png")
 	if err != nil {
@@ -82,36 +49,36 @@ func main() {
 	w.SetFixedSize(true)
 	a.Settings().SetTheme(&myTheme{theme.DarkTheme()})
 
-	mnuTools := fyne.NewMenu(lang.T("Tools"),
+	mnuTools := fyne.NewMenu(c.T("Tools"),
 		fyne.NewMenuItem(
-			lang.T("Generate Hash"), func() {
+			c.T("Generate Hash"), func() {
 				showGerarHash(a)
 			}),
 	)
 
-	mnuAbout := fyne.NewMenu(lang.T("About"),
-		fyne.NewMenuItem(lang.T("Check Update"), func() {
+	mnuAbout := fyne.NewMenu(c.T("About"),
+		fyne.NewMenuItem(c.T("Check Update"), func() {
 			url, _ := url.Parse("https://www.mugomes.com.br/2025/07/micheckhash.html")
 			a.OpenURL(url)
 		}),
 		fyne.NewMenuItemSeparator(),
-		fyne.NewMenuItem(lang.T("Support MiCheckHash"), func() {
+		fyne.NewMenuItem(c.T("Support MiCheckHash"), func() {
 			url, _ := url.Parse("https://www.mugomes.com.br/p/apoie.html")
 			a.OpenURL(url)
 		}),
-		fyne.NewMenuItem(lang.T("Technical Support"), func() {
+		fyne.NewMenuItem(c.T("Technical Support"), func() {
 			url, _ := url.Parse("https://www.mugomes.com.br/2025/07/micheckhash.html#support")
 			a.OpenURL(url)
 		}),
 		fyne.NewMenuItemSeparator(),
-		fyne.NewMenuItem(lang.T("About MiCheckHash"), func() {
+		fyne.NewMenuItem(c.T("About MiCheckHash"), func() {
 			showAbout(a)
 		}),
 	)
 
 	w.SetMainMenu(fyne.NewMainMenu(mnuTools, mnuAbout))
 
-	lblTipo := widget.NewLabel(lang.T("Hash Type"))
+	lblTipo := widget.NewLabel(c.T("Hash Type"))
 	lblTipo.TextStyle = fyne.TextStyle{Bold: true}
 
 	sOptions := []string{"MD5", "SHA1", "SHA256", "SHA512"}
@@ -120,11 +87,11 @@ func main() {
 	txtTipo.Resize(fyne.NewSize(w.Canvas().Size().Width-7, 40))
 	txtTipo.Move(fyne.NewPos(0, lblTipo.Position().Y+37))
 
-	lblArquivo := widget.NewLabel(lang.T("File"))
+	lblArquivo := widget.NewLabel(c.T("File"))
 	lblArquivo.TextStyle = fyne.TextStyle{Bold: true}
 	lblArquivo.Move(fyne.NewPos(0, txtTipo.Position().Y+37))
 	txtArquivo := widget.NewEntry()
-	txtArquivo.SetPlaceHolder(lang.T("Select file"))
+	txtArquivo.SetPlaceHolder(c.T("Select file"))
 	txtArquivo.Move(fyne.NewPos(0, lblArquivo.Position().Y+37))
 	txtArquivo.Resize(fyne.NewSize(w.Canvas().Size().Width-52, 38.4))
 	txtArquivo.Disable()
@@ -139,7 +106,7 @@ func main() {
 	btnArquivo.Resize(fyne.NewSize(30, 38.4))
 	btnArquivo.Move(fyne.NewPos(txtArquivo.Size().Width+10, txtArquivo.Position().Y))
 
-	lblHash := widget.NewLabel(lang.T("Type/Paste the Hash"))
+	lblHash := widget.NewLabel(c.T("Type/Paste the Hash"))
 	lblHash.Move(fyne.NewPos(0, txtArquivo.Position().Y+37))
 	txtHash := widget.NewEntry()
 	txtHash.Resize(fyne.NewSize(w.Canvas().Size().Width-7, 37))
@@ -148,10 +115,10 @@ func main() {
 	var lblInfo *widget.Label
 	var btnCheck *widget.Button
 
-	btnCheck = widget.NewButton(lang.T("Check Now"), func() {
+	btnCheck = widget.NewButton(c.T("Check Now"), func() {
 		go func() {
 			fyne.Do(func() {
-				lblInfo.SetText(lang.T("Verifying Hash... Please wait!"))
+				lblInfo.SetText(c.T("Verifying Hash... Please wait!"))
 				btnCheck.Disable()
 			})
 
@@ -167,18 +134,18 @@ func main() {
 			file, _ := os.Open(sFilename)
 			defer file.Close()
 
-			fileHash := checkHash(sTipoHash, file)
+			fileHash := c.GetHash(sTipoHash, file)
 
 			fyne.Do(func() {
 				lblInfo.SetText("")
 			})
 			if fileHash == sHash {
 				fyne.Do(func() {
-					dialog.NewInformation("MiCheckHash", lang.T("Success!"), w).Show()
+					dialog.NewInformation("MiCheckHash", c.T("Success!"), w).Show()
 				})
 			} else {
 				fyne.Do(func() {
-					dialog.NewInformation("MiCheckHash", lang.T("Different!"), w).Show()
+					dialog.NewInformation("MiCheckHash", c.T("Different!"), w).Show()
 				})
 			}
 

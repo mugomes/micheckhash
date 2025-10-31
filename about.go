@@ -58,7 +58,7 @@ func showAbout(a fyne.App) {
 	Ao baixar, acessar, instalar, copiar ou utilizar o Software ou código-fonte fornecido pelo Desenvolvedor, o Usuário reconhece que leu, compreendeu e concordou com os termos e condições do Contrato de Licença do Usuário Final (EULA) do MiCheckHash.
 	`)
 	txtLicense.Wrapping = fyne.TextWrapWord
-	
+
 	vBoxLicense := container.NewVScroll(txtLicense)
 	vBoxLicense.Move(fyne.NewPos(0, lblLicense1.Position().Y+37))
 	vBoxLicense.Resize(fyne.NewSize(597, 257))
