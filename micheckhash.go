@@ -36,10 +36,7 @@ func (m myTheme) Size(name fyne.ThemeSizeName) float32 {
 func main() {
 	c.LoadTranslations()
 
-	sIcon, err := fyne.LoadResourceFromPath("icon/micheckhash.png")
-	if err != nil {
-		panic(err)
-	}
+	sIcon := fyne.NewStaticResource("micheckhash.png", resourceMicheckhashPngData)
 
 	a := app.NewWithID("br.com.mugomes.micheckhash")
 	a.SetIcon(sIcon)
