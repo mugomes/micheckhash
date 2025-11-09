@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 )
 
@@ -37,21 +38,20 @@ func GetSystemLanguage() string {
 	return strings.ToLower(baseParts[0])
 }
 
-var miPath string
-
-func getPath() {
-    exe := ""
-	if IsDevMode() {
-        miPath, _ = os.Getwd()
-	} else {
-		exe, _ = os.Executable()
-        miPath = filepath.Dir(exe)
-	}	
-}
-
 func LoadTranslations() error {
-	getPath()
-	file, err := os.Open(miPath + "/langs/" + GetSystemLanguage() + ".json")
+	// getPath()
+	var sPath string = "langs/"
+	if runtime.GOOS == "linux" {
+		if IsDevMode() {
+			sPath, _ = os.Getwd()
+		} else {
+			exe, _ := os.Executable()
+			sPath = filepath.Dir(exe)
+		}
+
+		sPath += "/langs/"
+	}
+	file, err := os.Open(sPath + GetSystemLanguage() + ".json")
 	if err != nil {
 		return err
 	}
