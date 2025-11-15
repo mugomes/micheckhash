@@ -20,6 +20,10 @@ MiCheckHash is a software for checking and generating file hashes.
 
 ## License
 
-Todos os direitos deste software e código-fonte foram reservados pelo Desenvolvedor. Qualquer reprodução ou distribuição não autorizada ou uso deste software ou código-fonte sem a devida autorização do desenvolvedor é estritamente proibido e sujeito a ações legais.
+The MiCheckHash is provided under:
 
-Ao baixar, acessar, instalar, copiar ou utilizar o Software ou código-fonte fornecido pelo Desenvolvedor, o Usuário reconhece que leu, compreendeu e concordou com os termos e condições do Contrato de Licença do Usuário Final (EULA) disponível em https://github.com/mugomes/micheckhash/blob/main/LICENSE.md
+[SPDX-License-Identifier: GPL-2.0-only](https://github.com/mugomes/micheckhash/blob/main/LICENSE)
+
+Beign under the terms of the GNU General Public License version 2 only.
+
+All contributions to the MiCheckHash are subject to this license.
