@@ -24,7 +24,7 @@ import (
 	"github.com/mugomes/mgdialogopenfile"
 )
 
-const VERSION_APP string = "5.1.0"
+const VERSION_APP string = "6.0.0"
 
 type myDarkTheme struct{}
 func (m myDarkTheme) Color(name fyne.ThemeColorName, variant fyne.ThemeVariant) color.Color {
