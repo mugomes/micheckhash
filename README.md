@@ -16,10 +16,8 @@ MiCheckHash is a software for checking and generating file hashes.
 
 ## Support
 
-- https://www.asaas.com/c/girp15xsowg4dpvf (Only in Brazil)
-- https://www.asaas.com/c/0f9eydhmgg8e3mrj (Only in Brazil - Monthly)
-- https://donate.stripe.com/14kdSugShfxs9by6oo
-- https://apoia.se/profmu
+- GitHub: https://github.com/sponsors/mugomes/
+- More: https://mugomes.github.io/apoie.html
 
 ## License
 
