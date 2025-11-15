@@ -1,7 +1,7 @@
-// MiCheckHash
-// Copyright (C) 2025 Murilo Gomes Julio. Todos os direitos reservados.
+// Copyright (C) 2025 Murilo Gomes Julio
+// SPDX-License-Identifier: GPL-2.0-only
 
-// Este software e código-fonte é distribuído sob os termos do Contrato de Licença de Usuário Final do MiCheckHash.
+// Site: https://mugomes.github.io
 
 package main
 
@@ -37,11 +37,11 @@ func showAbout(a fyne.App) {
 	lblSite1.TextStyle = fyne.TextStyle{Bold: true}
 	lblSite1.Move(fyne.NewPos(0, lblDesenvolvedor1.Position().Y+37))
 
-	sURL, _ := url.Parse("https://www.mugomes.com.br")
-	lblSite2 := widget.NewHyperlink("https://www.mugomes.com.br", sURL)
+	sURL, _ := url.Parse("https://mugomes.github.io")
+	lblSite2 := widget.NewHyperlink("https://mugomes.github.io", sURL)
 	lblSite2.Move(fyne.NewPos(lblSite1.MinSize().Width-10, lblDesenvolvedor2.Position().Y+37))
 
-	lblCopyright1 := widget.NewLabel("Copyright (C) 2024-2025 Murilo Gomes Julio. Todos os direitos reservados.")
+	lblCopyright1 := widget.NewLabel("Copyright (C) 2024-2025 Murilo Gomes Julio")
 	lblCopyright1.TextStyle = fyne.TextStyle{Bold: true}
 	lblCopyright1.Move(fyne.NewPos(0, lblSite1.Position().Y+37))
 
@@ -49,30 +49,19 @@ func showAbout(a fyne.App) {
 	lblLicense1.TextStyle = fyne.TextStyle{Bold: true}
 	lblLicense1.Move(fyne.NewPos(0, lblCopyright1.Position().Y+37))
 
-	lblLicense2 := widget.NewLabel("Gratuito")
+	lblLicense2 := widget.NewLabel("GPL-2.0-only")
 	lblLicense2.Move(fyne.NewPos(lblLicense1.MinSize().Width-10, lblCopyright1.Position().Y+37))
 
 	txtLicense := widget.NewRichTextFromMarkdown(`
-	Todos os direitos deste software e código-fonte foram reservados pelo Desenvolvedor. Qualquer reprodução, distribuição não autorizada ou uso deste software ou código-fonte sem a devida autorização do desenvolvedor é estritamente proibido e sujeito a ações legais.
-
-	Ao baixar, acessar, instalar, copiar ou utilizar o Software ou código-fonte fornecido pelo Desenvolvedor, o Usuário reconhece que leu, compreendeu e concordou com os termos e condições do Contrato de Licença do Usuário Final (EULA) do MiCheckHash.
+	MiCheckHash is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, only version 2 of the License.
+	
+	MiCheckHash is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 	`)
 	txtLicense.Wrapping = fyne.TextWrapWord
-
+	
 	vBoxLicense := container.NewVScroll(txtLicense)
 	vBoxLicense.Move(fyne.NewPos(0, lblLicense1.Position().Y+37))
 	vBoxLicense.Resize(fyne.NewSize(597, 257))
-	// sURL, _ := url.Parse("https://github.com/mugomes/micheckhash")
-	// lblSite2 := &clickText{
-	// 	Text: canvas.NewText("https://github.com/mugomes/micheckhash", color.Black),
-	// 	URL: sURL,
-	// }
-	// lblSite2.TextSize = 15
-	// lblSite2.Move(fyne.NewPos(lblSite1.MinSize().Width+5, lblSite1.Position().Y))
-
-	// hBox1 := container.NewHBox(lblDesenvolvedor1,lblDesenvolvedor2)
-	// hBox2 := container.NewHBox(lblSite1,lblSite2)
-	// vBox := container.NewVBox(hBox1, hBox2)
 
 	layout := container.NewWithoutLayout(
 		lblSoftware,
