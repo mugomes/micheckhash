@@ -13,6 +13,7 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
+	"github.com/mugomes/mgdialogopenfile"
 
 	c "mugomes/micheckhash/controls"
 	"os"
@@ -45,14 +46,12 @@ func showGerarHash(a fyne.App) {
 	txtArquivo.Disable()
 
 	btnArquivo := widget.NewButton("...", func() {
-		dialog.ShowFileOpen(func(r fyne.URIReadCloser, err error) {
-			if r != nil {
-				sPath := r.URI().Path()
-				txtArquivo.SetText(sPath)
-			} else {
-				return
+		sOpenFile := mgdialogopenfile.New(a, c.T("Open File"), []string{}, false, func(filenames []string) {
+			for _, filename := range filenames {
+				txtArquivo.SetText(filename)
 			}
-		}, w)
+		})
+		sOpenFile.Show()
 	})
 
 	btnArquivo.Resize(fyne.NewSize(30, 38.4))
