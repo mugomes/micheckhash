@@ -6,11 +6,8 @@
 package controls
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"
-	"runtime"
 	"strings"
 )
 
@@ -38,27 +35,28 @@ func GetSystemLanguage() string {
 	return strings.ToLower(baseParts[0])
 }
 
-func LoadTranslations() error {
-	// getPath()
-	var sPath string = "langs/"
-	if runtime.GOOS == "linux" {
-		if IsDevMode() {
-			sPath, _ = os.Getwd()
-		} else {
-			exe, _ := os.Executable()
-			sPath = filepath.Dir(exe)
-		}
-
-		sPath += "/langs/"
+func LoadTranslations() {
+	if GetSystemLanguage() == "pt" {
+		valor := make(map[string]string)
+		valor["File"] = "Arquivo"
+		valor["Save"] = "Salvar"
+		valor["Hash Type"] = "Tipo de Hash"
+		valor["Select file"] = "Selecione o arquivo"
+		valor["Generate Hash"] = "Gerar Hash"
+		valor["Success!"] = "Sucesso!"
+		valor["Different!"] = "Diferente"
+		valor["Tools"] = "Ferramentas"
+		valor["About"] = "Sobre"
+		valor["Check Update"] = "Verificar Atualização"
+		valor["Support MiCheckHash"] = "Apoie MiCheckHash"
+		valor["Technical Support"] = "Suporte Técnico"
+		valor["About MiCheckHash"] = "Sobre MiCheckHash"
+		valor["Type/Paste the Hash"] = "Digite/Cole o Hash"
+		valor["Check Now"] = "Verificar Agora"
+		valor["Verifying Hash... Please wait!"] = "Verificando Hash... Aguarde!"
+		valor["Generating Hash... Please wait!"] = "Gerando Hash... Aguarde!"
+		tr = valor
 	}
-	file, err := os.Open(sPath + GetSystemLanguage() + ".json")
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	decoder := json.NewDecoder(file)
-	return decoder.Decode(&tr)
 }
 
 // T retorna o texto traduzido com formatação opcional.
