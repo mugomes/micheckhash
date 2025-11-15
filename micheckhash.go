@@ -20,6 +20,8 @@ import (
 	"net/url"
 	"os"
 	"strings"
+
+	"github.com/mugomes/mgdialogopenfile"
 )
 
 const VERSION_APP string = "5.1.0"
@@ -76,16 +78,12 @@ func main() {
 
 	mnuAbout := fyne.NewMenu(c.T("About"),
 		fyne.NewMenuItem(c.T("Check Update"), func() {
-			url, _ := url.Parse("https://www.mugomes.com.br/2025/07/micheckhash.html")
+			url, _ := url.Parse("https://github.com/mugomes/micheckhash/releases/")
 			a.OpenURL(url)
 		}),
 		fyne.NewMenuItemSeparator(),
 		fyne.NewMenuItem(c.T("Support MiCheckHash"), func() {
-			url, _ := url.Parse("https://www.mugomes.com.br/p/apoie.html")
-			a.OpenURL(url)
-		}),
-		fyne.NewMenuItem(c.T("Technical Support"), func() {
-			url, _ := url.Parse("https://www.mugomes.com.br/2025/07/micheckhash.html#support")
+			url, _ := url.Parse("https://mugomes.github.io/apoie.html")
 			a.OpenURL(url)
 		}),
 		fyne.NewMenuItemSeparator(),
@@ -114,12 +112,12 @@ func main() {
 	txtArquivo.Resize(fyne.NewSize(w.Canvas().Size().Width-52, 38.4))
 	txtArquivo.Disable()
 	btnArquivo := widget.NewButton("...", func() {
-		dialog.ShowFileOpen(func(r fyne.URIReadCloser, err error) {
-			if r != nil {
-				sPath := r.URI().Path()
-				txtArquivo.SetText(sPath)
+		sOpenFile := mgdialogopenfile.New(a, c.T("Open File"), []string{}, false, func(filenames []string) {
+			for _, filename := range filenames {
+				txtArquivo.SetText(filename)
 			}
-		}, w)
+		})
+		sOpenFile.Show()
 	})
 	btnArquivo.Resize(fyne.NewSize(30, 38.4))
 	btnArquivo.Move(fyne.NewPos(txtArquivo.Size().Width+10, txtArquivo.Position().Y))
