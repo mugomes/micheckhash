@@ -6,6 +6,8 @@
 package main
 
 import (
+	"image/color"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
@@ -20,17 +22,36 @@ import (
 	"strings"
 )
 
-const VERSION_APP string = "5.0.1"
+const VERSION_APP string = "5.1.0"
 
-type myTheme struct {
-	fyne.Theme
+type myDarkTheme struct{}
+func (m myDarkTheme) Color(name fyne.ThemeColorName, variant fyne.ThemeVariant) color.Color {
+	// A lógica para forçar o modo escuro é retornar cores escuras.
+	// O Fyne usa estas constantes internamente:
+	switch name {
+	case theme.ColorNameBackground:
+		return color.RGBA{28, 28, 28, 255} // Fundo preto
+	case theme.ColorNameForeground:
+		return color.White // Texto branco
+	// Adicione outros casos conforme a necessidade (InputBackground, Primary, etc.)
+	default:
+		// Retorna o tema escuro padrão para as outras cores (se existirem)
+		// Aqui estamos apenas definindo as cores principais para garantir o Dark Mode
+		return theme.DefaultTheme().Color(name, theme.VariantDark) 
+	}
 }
 
-func (m myTheme) Size(name fyne.ThemeSizeName) float32 {
-	if name == theme.SizeNameText {
-		return 16
-	}
-	return m.Theme.Size(name)
+// 3. Implemente os outros métodos necessários da interface fyne.Theme (usando o tema padrão)
+func (m myDarkTheme) Font(s fyne.TextStyle) fyne.Resource {
+	return theme.DefaultTheme().Font(s)
+}
+
+func (m myDarkTheme) Icon(n fyne.ThemeIconName) fyne.Resource {
+	return theme.DefaultTheme().Icon(n)
+}
+
+func (m myDarkTheme) Size(n fyne.ThemeSizeName) float32 {
+	return theme.DefaultTheme().Size(n)
 }
 
 func main() {
@@ -44,7 +65,7 @@ func main() {
 	w.Resize(fyne.NewSize(500, 379))
 	w.CenterOnScreen()
 	w.SetFixedSize(true)
-	a.Settings().SetTheme(&myTheme{theme.DarkTheme()})
+	a.Settings().SetTheme(&myDarkTheme{})
 
 	mnuTools := fyne.NewMenu(c.T("Tools"),
 		fyne.NewMenuItem(
