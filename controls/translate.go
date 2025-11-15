@@ -1,7 +1,7 @@
-// MiCheckHash
-// Copyright (C) 2025 Murilo Gomes Julio. Todos os direitos reservados.
+// Copyright (C) 2025 Murilo Gomes Julio
+// SPDX-License-Identifier: GPL-2.0-only
 
-// Este software e código-fonte é distribuído sob os termos do Contrato de Licença de Usuário Final do MiCheckHash.
+// Site: https://mugomes.github.io
 
 package controls
 
