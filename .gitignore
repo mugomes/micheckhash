@@ -5,3 +5,6 @@ fyne-cross/
 #files
 micheckhash.spec
 
+# compile
+compile.sh
+
