@@ -13,6 +13,11 @@ MiCheckHash is a software for checking and generating file hashes.
  - Ubuntu 24.04 or higher
  - Graphics: GPU with OpenGL support (required for 3D acceleration)
 
+### Windows
+
+- Windows 10 or higher
+- Graphics: GPU with OpenGL support (required for 3D acceleration)
+
 ## Support
 
 - GitHub: https://github.com/sponsors/mugomes/
