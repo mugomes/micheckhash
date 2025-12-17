@@ -5,54 +5,32 @@
 
 package controls
 
-import (
-	"fmt"
-	"runtime"
-	"mugomes/micheckhash/locale"
-)
+import "github.com/mugomes/mglang"
 
-type Translations map[string]string
-
-var tr Translations
-
-// Detecta o idioma do sistema e retorna apenas o código base (pt, en, es, etc.)
 func LoadTranslations() {
-	platform := runtime.GOOS
-	var lang string
-	if platform == "linux" {
-		lang = locale.Current.GetSystemLanguage()
-	} else {
-		lang = locale.Current.GetSystemLanguage()
-	}
-
+	lang := mglang.GetLang()
 	if lang == "pt" {
-		valor := make(map[string]string)
-		valor["File"] = "Arquivo"
-		valor["Save"] = "Salvar"
-		valor["Hash Type"] = "Tipo de Hash"
-		valor["Select file"] = "Selecione o arquivo"
-		valor["Generate Hash"] = "Gerar Hash"
-		valor["Success!"] = "Sucesso!"
-		valor["Different!"] = "Diferente"
-		valor["Tools"] = "Ferramentas"
-		valor["About"] = "Sobre"
-		valor["Check Update"] = "Verificar Atualização"
-		valor["Support MiCheckHash"] = "Apoie MiCheckHash"
-		valor["Technical Support"] = "Suporte Técnico"
-		valor["About MiCheckHash"] = "Sobre MiCheckHash"
-		valor["Type/Paste the Hash"] = "Digite/Cole o Hash"
-		valor["Check Now"] = "Verificar Agora"
-		valor["Verifying Hash... Please wait!"] = "Verificando Hash... Aguarde!"
-		valor["Generating Hash... Please wait!"] = "Gerando Hash... Aguarde!"
-		tr = valor
+		mglang.Set("File", "Arquivo")
+		mglang.Set("Save", "Salvar")
+		mglang.Set("Hash Type", "Tipo de Hash")
+		mglang.Set("Select file", "Selecione o arquivo")
+		mglang.Set("Generate Hash", "Gerar Hash")
+		mglang.Set("Success!", "Sucesso!")
+		mglang.Set("Different!", "Diferente")
+		mglang.Set("Tools", "Ferramentas")
+		mglang.Set("About", "Sobre")
+		mglang.Set("Check Update", "Verificar Atualização")
+		mglang.Set("Support MiCheckHash", "Apoie MiCheckHash")
+		mglang.Set("Technical Support", "Suporte Técnico")
+		mglang.Set("About MiCheckHash", "Sobre MiCheckHash")
+		mglang.Set("Type/Paste the Hash", "Digite/Cole o Hash")
+		mglang.Set("Check Now", "Verificar Agora")
+		mglang.Set("Verifying Hash... Please wait!", "Verificando Hash... Aguarde!")
+		mglang.Set("Generating Hash... Please wait!", "Gerando Hash... Aguarde!")
+		mglang.Set("File created successfully!", "Arquivo criado com sucesso!")
 	}
 }
 
-// T retorna o texto traduzido com formatação opcional.
 func T(key string, args ...interface{}) string {
-	msg, ok := tr[key]
-	if !ok {
-		msg = key // fallback se não achar
-	}
-	return fmt.Sprintf(msg, args...)
+	return mglang.T(key, args...)
 }
