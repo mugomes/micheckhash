@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Murilo Gomes Julio
+// Copyright (C) 2024-2025 Murilo Gomes Julio
 // SPDX-License-Identifier: GPL-2.0-only
 
 // Site: https://mugomes.github.io
@@ -13,8 +13,7 @@ import (
 	"encoding/hex"
 	"hash"
 	"io"
-)
-	
+)	
 
 func GetHash(sTipoHash string, file io.Reader) string {
 	var hashsum hash.Hash
