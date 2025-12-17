@@ -11,7 +11,6 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
@@ -21,12 +20,14 @@ import (
 	"os"
 	"strings"
 
-	"github.com/mugomes/mgdialogopenfile"
+	"github.com/mugomes/mgdialogbox"
+	"github.com/mugomes/mgsmartflow"
 )
 
 const VERSION_APP string = "6.1.0"
 
 type myDarkTheme struct{}
+
 func (m myDarkTheme) Color(name fyne.ThemeColorName, variant fyne.ThemeVariant) color.Color {
 	// A lógica para forçar o modo escuro é retornar cores escuras.
 	// O Fyne usa estas constantes internamente:
@@ -39,7 +40,7 @@ func (m myDarkTheme) Color(name fyne.ThemeColorName, variant fyne.ThemeVariant) 
 	default:
 		// Retorna o tema escuro padrão para as outras cores (se existirem)
 		// Aqui estamos apenas definindo as cores principais para garantir o Dark Mode
-		return theme.DefaultTheme().Color(name, theme.VariantDark) 
+		return theme.DefaultTheme().Color(name, theme.VariantDark)
 	}
 }
 
@@ -64,7 +65,7 @@ func main() {
 	a := app.NewWithID("br.com.mugomes.micheckhash")
 	a.SetIcon(sIcon)
 	w := a.NewWindow("MiCheckHash")
-	w.Resize(fyne.NewSize(500, 379))
+	w.Resize(fyne.NewSize(500, 386))
 	w.CenterOnScreen()
 	w.SetFixedSize(true)
 	a.Settings().SetTheme(&myDarkTheme{})
@@ -78,12 +79,12 @@ func main() {
 
 	mnuAbout := fyne.NewMenu(c.T("About"),
 		fyne.NewMenuItem(c.T("Check Update"), func() {
-			url, _ := url.Parse("https://github.com/mugomes/micheckhash/releases/")
+			url, _ := url.Parse("https://www.mugomes.com.br/p/micheckhash.html")
 			a.OpenURL(url)
 		}),
 		fyne.NewMenuItemSeparator(),
 		fyne.NewMenuItem(c.T("Support MiCheckHash"), func() {
-			url, _ := url.Parse("https://mugomes.github.io/apoie.html")
+			url, _ := url.Parse("https://www.mugomes.com.br/p/apoie.html")
 			a.OpenURL(url)
 		}),
 		fyne.NewMenuItemSeparator(),
@@ -94,39 +95,50 @@ func main() {
 
 	w.SetMainMenu(fyne.NewMainMenu(mnuTools, mnuAbout))
 
+	flow := mgsmartflow.New()
+
 	lblTipo := widget.NewLabel(c.T("Hash Type"))
 	lblTipo.TextStyle = fyne.TextStyle{Bold: true}
 
 	sOptions := []string{"MD5", "SHA1", "SHA256", "SHA512"}
 	txtTipo := widget.NewSelect(sOptions, func(string) {})
 	txtTipo.PlaceHolder = "MD5"
-	txtTipo.Resize(fyne.NewSize(w.Canvas().Size().Width-7, 40))
-	txtTipo.Move(fyne.NewPos(0, lblTipo.Position().Y+37))
+
+	flow.AddRow(container.NewVBox(
+		lblTipo, txtTipo,
+	))
 
 	lblArquivo := widget.NewLabel(c.T("File"))
 	lblArquivo.TextStyle = fyne.TextStyle{Bold: true}
 	lblArquivo.Move(fyne.NewPos(0, txtTipo.Position().Y+37))
 	txtArquivo := widget.NewEntry()
 	txtArquivo.SetPlaceHolder(c.T("Select file"))
-	txtArquivo.Move(fyne.NewPos(0, lblArquivo.Position().Y+37))
-	txtArquivo.Resize(fyne.NewSize(w.Canvas().Size().Width-52, 38.4))
 	txtArquivo.Disable()
 	btnArquivo := widget.NewButton("...", func() {
-		sOpenFile := mgdialogopenfile.New(a, c.T("Open File"), []string{}, false, func(filenames []string) {
+		mgdialogbox.NewOpenFile(a, c.T("Open File"), []string{}, false, func(filenames []string) {
 			for _, filename := range filenames {
 				txtArquivo.SetText(filename)
 			}
 		})
-		sOpenFile.Show()
 	})
 	btnArquivo.Resize(fyne.NewSize(30, 38.4))
 	btnArquivo.Move(fyne.NewPos(txtArquivo.Size().Width+10, txtArquivo.Position().Y))
 
+	ctnArquivo := container.NewVBox(widget.NewLabel(""), btnArquivo)
+	flow.AddColumn(
+		container.NewVBox(lblArquivo, txtArquivo),
+		ctnArquivo,
+	)
+
+	flow.SetResize(ctnArquivo, fyne.NewSize(50, 0))
+
 	lblHash := widget.NewLabel(c.T("Type/Paste the Hash"))
-	lblHash.Move(fyne.NewPos(0, txtArquivo.Position().Y+37))
+	lblHash.TextStyle = fyne.TextStyle{Bold: true}
 	txtHash := widget.NewEntry()
-	txtHash.Resize(fyne.NewSize(w.Canvas().Size().Width-7, 37))
-	txtHash.Move(fyne.NewPos(0, lblHash.Position().Y+37))
+
+	flow.AddRow(
+		container.NewVBox(lblHash, txtHash),
+	)
 
 	var lblInfo *widget.Label
 	var btnCheck *widget.Button
@@ -157,11 +169,11 @@ func main() {
 			})
 			if fileHash == sHash {
 				fyne.Do(func() {
-					dialog.NewInformation("MiCheckHash", c.T("Success!"), w).Show()
+					mgdialogbox.NewAlert(a, "MiCheckHash", c.T("Success!"), false, "Ok")
 				})
 			} else {
 				fyne.Do(func() {
-					dialog.NewInformation("MiCheckHash", c.T("Different!"), w).Show()
+					mgdialogbox.NewAlert(a, "MiCheckHash", c.T("Different!"), true, "Ok")
 				})
 			}
 
@@ -171,29 +183,20 @@ func main() {
 		}()
 	})
 
-	ctn := container.NewHBox(
+	flow.AddRow(layout.NewSpacer())
+	flow.AddRow(layout.NewSpacer())
+	flow.AddRow(layout.NewSpacer())
+
+	flow.AddColumn(
 		layout.NewSpacer(),
 		btnCheck,
 		layout.NewSpacer(),
 	)
-	ctn.Resize(fyne.NewSize(w.Canvas().Size().Width, 30))
-	ctn.Move(fyne.NewPos(0, txtHash.Position().Y+57))
 
 	lblInfo = widget.NewLabel("")
-	lblInfo.Move(fyne.NewPos(0, ctn.Position().Y+37))
-	//btnCheck.Move(fyne.NewPos(0, ))
 
-	layout := container.NewWithoutLayout(
-		lblTipo,
-		txtTipo,
-		lblArquivo,
-		txtArquivo,
-		btnArquivo,
-		lblHash,
-		txtHash,
-		ctn,
-		lblInfo,
-	)
-	w.SetContent(layout)
+	flow.AddRow(lblInfo)
+
+	w.SetContent(flow.Container)
 	w.ShowAndRun()
 }

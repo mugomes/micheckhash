@@ -10,15 +10,16 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
-	"github.com/mugomes/mgdialogopenfile"
+	"github.com/mugomes/mgdialogbox"
 
 	c "mugomes/micheckhash/controls"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/mugomes/mgsmartflow"
 )
 
 func showGerarHash(a fyne.App) {
@@ -28,34 +29,39 @@ func showGerarHash(a fyne.App) {
 	w.CenterOnScreen()
 	w.SetFixedSize(true)
 
+	flow := mgsmartflow.New()
+
 	lblTipoHash := widget.NewLabel(c.T("Hash Type"))
-	lblTipoHash.Move(fyne.NewPos(5, 0))
 	lblTipoHash.TextStyle = fyne.TextStyle{Bold: true}
 	sOptions := []string{"MD5", "SHA1", "SHA256", "SHA512"}
 	cboTipoHash := widget.NewSelect(sOptions, func(string) {})
 	cboTipoHash.PlaceHolder = "MD5"
-	cboTipoHash.Resize(fyne.NewSize(w.Canvas().Size().Width-17, 30))
-	cboTipoHash.Move(fyne.NewPos(5, lblTipoHash.Position().Y+37))
+
+	flow.AddRow(
+		container.NewVBox(lblTipoHash, cboTipoHash),
+	)
 
 	lblArquivo := widget.NewLabel(c.T("Select file"))
 	lblArquivo.TextStyle = fyne.TextStyle{Bold: true}
-	lblArquivo.Move(fyne.NewPos(5, cboTipoHash.Position().Y+37))
 	txtArquivo := widget.NewEntry()
-	txtArquivo.Resize(fyne.NewSize(w.Canvas().Size().Width-52, 38.4))
-	txtArquivo.Move(fyne.NewPos(5, lblArquivo.Position().Y+37))
 	txtArquivo.Disable()
 
 	btnArquivo := widget.NewButton("...", func() {
-		sOpenFile := mgdialogopenfile.New(a, c.T("Open File"), []string{}, false, func(filenames []string) {
+		mgdialogbox.NewOpenFile(a, c.T("Open File"), []string{}, false, func(filenames []string) {
 			for _, filename := range filenames {
 				txtArquivo.SetText(filename)
 			}
 		})
-		sOpenFile.Show()
 	})
 
-	btnArquivo.Resize(fyne.NewSize(30, 38.4))
-	btnArquivo.Move(fyne.NewPos(txtArquivo.Size().Width+10, txtArquivo.Position().Y))
+	ctnArquivo := container.NewVBox(widget.NewLabel(""), btnArquivo)
+
+	flow.AddColumn(
+		container.NewVBox(lblArquivo, txtArquivo),
+		ctnArquivo,
+	)
+
+	flow.SetResize(ctnArquivo, fyne.NewSize(50, 0))
 
 	var btnGerar *widget.Button
 	var txtInfo *widget.Entry
@@ -88,39 +94,39 @@ func showGerarHash(a fyne.App) {
 		}()
 	})
 
-	ctnGerar := container.NewHBox(
+	flow.AddRow(layout.NewSpacer())
+	flow.AddRow(layout.NewSpacer())
+	flow.AddRow(layout.NewSpacer())
+
+	flow.AddColumn(
 		layout.NewSpacer(),
 		btnGerar,
 		layout.NewSpacer(),
 	)
 
-	ctnGerar.Resize(fyne.NewSize(w.Canvas().Size().Width-17, 30))
-	ctnGerar.Move(fyne.NewPos(5, txtArquivo.Position().Y+60))
+	flow.SetGap(btnGerar, fyne.NewPos(0, 29))
 
 	txtInfo = widget.NewEntry()
 	txtInfo.Disable()
-	txtInfo.Resize(fyne.NewSize(w.Canvas().Size().Width-87, 38.04))
-	txtInfo.Move(fyne.NewPos(5, ctnGerar.Position().Y+52))
+
 	btnSave = widget.NewButton(c.T("Save"), func() {
 		sFilename := filepath.Base(txtArquivo.Text)
-		sConteudo := fmt.Appendf(nil, "%s %s",txtInfo.Text, sFilename)
-		if err := os.WriteFile(txtArquivo.Text+"."+sTipoHash, sConteudo, 0644); err != nil {
-			dialog.NewError(err, w)
+		sConteudo := fmt.Appendf(nil, "%s %s", txtInfo.Text, sFilename)
+		err := os.WriteFile(txtArquivo.Text+"."+sTipoHash, sConteudo, 0644)
+		
+		if err != nil {
+			mgdialogbox.NewAlert(a, "MiCheckHash", err.Error(), true, "Ok")
+		} else {
+			mgdialogbox.NewAlert(a, "MiCheckHash", c.T("File created successfully!"), false, "Ok")
 		}
 	})
-	btnSave.Resize(fyne.NewSize(67, 38.4))
-	btnSave.Move(fyne.NewPos(txtInfo.Size().Width+10, txtInfo.Position().Y))
 
-	layout := container.NewWithoutLayout(
-		lblTipoHash,
-		cboTipoHash,
-		lblArquivo,
-		txtArquivo,
-		btnArquivo,
-		ctnGerar,
-		txtInfo,
-		btnSave,
+	flow.AddColumn(
+		txtInfo, btnSave,
 	)
-	w.SetContent(layout)
+
+	flow.SetResize(btnSave, fyne.NewSize(57, 36))
+
+	w.SetContent(flow.Container)
 	w.Show()
 }
