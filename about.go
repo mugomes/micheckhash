@@ -1,7 +1,7 @@
-// Copyright (C) 2025 Murilo Gomes Julio
+// Copyright (C) 2024-2025 Murilo Gomes Julio
 // SPDX-License-Identifier: GPL-2.0-only
 
-// Site: https://mugomes.github.io
+// Site: https://www.mugomes.com.br
 
 package main
 
@@ -13,6 +13,7 @@ import (
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"github.com/mugomes/mgsmartflow"
 )
 
 func showAbout(a fyne.App) {
@@ -21,36 +22,40 @@ func showAbout(a fyne.App) {
 	w.CenterOnScreen()
 	w.SetFixedSize(true)
 
+	flow := mgsmartflow.New()
+	
 	lblSoftware := canvas.NewText("MiCheckHash - Version:"+VERSION_APP, color.Opaque)
 	lblSoftware.TextSize = 18
 	lblSoftware.TextStyle.Bold = true
-	lblSoftware.Move(fyne.NewPos(9, 7))
-
+	
+	flow.AddRow(lblSoftware)
+	
 	lblDesenvolvedor1 := widget.NewLabel("Desenvolvido por:")
 	lblDesenvolvedor1.TextStyle = fyne.TextStyle{Bold: true}
-	lblDesenvolvedor1.Move(fyne.NewPos(0, lblSoftware.MinSize().Height+10))
-
 	lblDesenvolvedor2 := widget.NewLabel("Murilo Gomes Julio")
-	lblDesenvolvedor2.Move(fyne.NewPos(lblDesenvolvedor1.MinSize().Width-10, lblDesenvolvedor1.Position().Y))
 
+	flow.AddColumn(lblDesenvolvedor1, lblDesenvolvedor2)
+	flow.SetResize(lblDesenvolvedor1, fyne.NewSize(142,0))
 	lblSite1 := widget.NewLabel("Site:")
 	lblSite1.TextStyle = fyne.TextStyle{Bold: true}
-	lblSite1.Move(fyne.NewPos(0, lblDesenvolvedor1.Position().Y+37))
 
-	sURL, _ := url.Parse("https://mugomes.github.io")
-	lblSite2 := widget.NewHyperlink("https://mugomes.github.io", sURL)
-	lblSite2.Move(fyne.NewPos(lblSite1.MinSize().Width-10, lblDesenvolvedor2.Position().Y+37))
+	sURL, _ := url.Parse("https://www.mugomes.com.br")
+	lblSite2 := widget.NewHyperlink("https://www.mugomes.com.br", sURL)
 
+	flow.AddColumn(lblSite1, lblSite2)
+	flow.SetResize(lblSite1, fyne.NewSize(34,0))
+	
 	lblCopyright1 := widget.NewLabel("Copyright (C) 2024-2025 Murilo Gomes Julio")
 	lblCopyright1.TextStyle = fyne.TextStyle{Bold: true}
-	lblCopyright1.Move(fyne.NewPos(0, lblSite1.Position().Y+37))
+	flow.AddRow(lblCopyright1)
 
 	lblLicense1 := widget.NewLabel("License:")
 	lblLicense1.TextStyle = fyne.TextStyle{Bold: true}
-	lblLicense1.Move(fyne.NewPos(0, lblCopyright1.Position().Y+37))
 
 	lblLicense2 := widget.NewLabel("GPL-2.0-only")
-	lblLicense2.Move(fyne.NewPos(lblLicense1.MinSize().Width-10, lblCopyright1.Position().Y+37))
+
+	flow.AddColumn(lblLicense1, lblLicense2)
+	flow.SetResize(lblLicense1, fyne.NewSize(62,0))
 
 	txtLicense := widget.NewRichTextFromMarkdown(`
 	MiCheckHash is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, only version 2 of the License.
@@ -60,20 +65,10 @@ func showAbout(a fyne.App) {
 	txtLicense.Wrapping = fyne.TextWrapWord
 	
 	vBoxLicense := container.NewVScroll(txtLicense)
-	vBoxLicense.Move(fyne.NewPos(0, lblLicense1.Position().Y+37))
-	vBoxLicense.Resize(fyne.NewSize(597, 257))
 
-	layout := container.NewWithoutLayout(
-		lblSoftware,
-		lblDesenvolvedor1,
-		lblDesenvolvedor2,
-		lblSite1,
-		lblSite2,
-		lblCopyright1,
-		lblLicense1,
-		lblLicense2,
-		vBoxLicense)
+	flow.AddRow(vBoxLicense)
+	flow.SetResize(vBoxLicense, fyne.NewSize(w.Canvas().Size().Width, 257))
 
-	w.SetContent(layout)
+	w.SetContent(flow.Container)
 	w.Show()
 }
