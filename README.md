@@ -1,5 +1,8 @@
 # MiCheckHash
 
+> [!NOTE]
+> This project is no longer maintained, I recommend using the [MGVerificaHash](https://www.mugomes.com.br/p/mgverificahash.html).
+
 MiCheckHash is a software for checking and generating file hashes.
 
 ## Information
@@ -17,11 +20,6 @@ MiCheckHash is a software for checking and generating file hashes.
 
 - Windows 10 or higher
 - Graphics: GPU with OpenGL support (required for 3D acceleration)
-
-## Support
-
-- GitHub: https://github.com/sponsors/mugomes/
-- More: https://mugomes.github.io/apoie.html
 
 ## License
 

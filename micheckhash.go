@@ -78,16 +78,6 @@ func main() {
 	)
 
 	mnuAbout := fyne.NewMenu(c.T("About"),
-		fyne.NewMenuItem(c.T("Check Update"), func() {
-			url, _ := url.Parse("https://www.mugomes.com.br/p/micheckhash.html")
-			a.OpenURL(url)
-		}),
-		fyne.NewMenuItemSeparator(),
-		fyne.NewMenuItem(c.T("Support MiCheckHash"), func() {
-			url, _ := url.Parse("https://www.mugomes.com.br/p/apoie.html")
-			a.OpenURL(url)
-		}),
-		fyne.NewMenuItemSeparator(),
 		fyne.NewMenuItem(c.T("About MiCheckHash"), func() {
 			showAbout(a)
 		}),
