@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Murilo Gomes Julio
+// Copyright (C) 2024-2026 Murilo Gomes Julio
 // SPDX-License-Identifier: GPL-2.0-only
 
 // Site: https://mugomes.github.io
@@ -78,6 +78,20 @@ func main() {
 	)
 
 	mnuAbout := fyne.NewMenu(c.T("About"),
+		fyne.NewMenuItem(c.T("Check Update"), func() {
+			url, err := url.Parse("https://mugomes.github.io")
+			if err == nil {
+				a.OpenURL(url)
+			}
+		}),
+		fyne.NewMenuItemSeparator(),
+		fyne.NewMenuItem(c.T("Support MiCheckHash"), func() {
+			url, err := url.Parse("https://mugomes.github.io/apoie.html")
+			if err == nil {
+				a.OpenURL(url)
+			}
+		}),
+		fyne.NewMenuItemSeparator(),
 		fyne.NewMenuItem(c.T("About MiCheckHash"), func() {
 			showAbout(a)
 		}),
