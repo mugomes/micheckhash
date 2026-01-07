@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Murilo Gomes Julio
+// Copyright (C) 2024-2026 Murilo Gomes Julio
 // SPDX-License-Identifier: GPL-2.0-only
 
 // Site: https://mugomes.github.io
@@ -21,7 +21,6 @@ func LoadTranslations() {
 		mglang.Set("About", "Sobre")
 		mglang.Set("Check Update", "Verificar Atualização")
 		mglang.Set("Support MiCheckHash", "Apoie MiCheckHash")
-		mglang.Set("Technical Support", "Suporte Técnico")
 		mglang.Set("About MiCheckHash", "Sobre MiCheckHash")
 		mglang.Set("Type/Paste the Hash", "Digite/Cole o Hash")
 		mglang.Set("Check Now", "Verificar Agora")
